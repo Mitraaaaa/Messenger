@@ -1,8 +1,35 @@
 from django.db import models
+# from user.models import User
 
-# Create your models here.
+
 class Chat ():
-    pass
+    TYPE_DM = 'DM'
+    TYPE_GP = 'GP'
+    TYP_CH = 'CH'
+    CHAT_TYPE = [
+        (TYPE_DM, 'Private'),
+        (TYPE_GP, 'Group'),
+        (TYP_CH, 'Channel')
+    ]
+    type = models.CharField(max_length=10, choices=CHAT_TYPE, default=TYPE_DM)
+    name = models.CharField(max_length=30, blank=True, null=True)
+    #member = models.ManyToManyField(User)
+
 
 class Message ():
-    pass
+    MSG_TXT = 'tx'
+    MSG_VC = 'vc'
+    MSG_MD = 'md'
+    MSG_TYPE = [
+        (MSG_MD, 'Media'),
+        (MSG_TXT, 'Text'),
+        (MSG_VC, 'Voice')
+    ]
+    # chat = models.ForeignKey(Chat, on_delete=models.SET_NULL, null=True)
+    # sender = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # replied msg ID
+    type = models.CharField(max_length=10, choices=MSG_TYPE, default=MSG_TXT)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message

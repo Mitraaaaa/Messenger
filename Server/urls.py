@@ -21,6 +21,7 @@ urlpatterns = [
     # TODO assign path
 
     path('admin/', admin.site.urls),
+    path('chats/v1/', include('chat.urls')),
     path('accounts/', include("django.contrib.auth.urls")),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
