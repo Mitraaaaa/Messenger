@@ -1,0 +1,83 @@
+<style>
+  form {
+    border: 3px solid #0c0c0c;
+    border-radius: 30px;
+    width: 40%;
+    display: inline-block;
+}
+
+body {
+    text-align: center;
+    background-color: aliceblue;
+}
+
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    box-sizing: border-box;
+  }
+
+
+  button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+.container {
+  padding: 16px;
+}
+
+h1 {
+  font-size: 55px;
+  font-style: normal;
+  text-align: center;
+}
+
+</style>
+
+
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1>Log In</h1>
+<form method="post" class="container">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+</form>
+{% endblock %}
+
+<!--
+  username: alireza
+  passowrd: 1234
+
+  username: mitra
+  passowrd: 1234
+
+  username: shaqayeq
+  passowrd: 1234
+
+  username: saman
+  passowrd: 1234
+-->
