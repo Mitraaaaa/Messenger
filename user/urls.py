@@ -5,3 +5,5 @@ from . import views
 urlpatterns = [
 
 ]
+
+MEDIA_URL = '/media/'

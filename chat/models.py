@@ -1,8 +1,8 @@
 from django.db import models
-# from user.models import User
+from user.models import custom_user
 
 
-class Chat ():
+class Chat (models.Model):
     TYPE_DM = 'DM'
     TYPE_GP = 'GP'
     TYP_CH = 'CH'
@@ -13,10 +13,10 @@ class Chat ():
     ]
     type = models.CharField(max_length=10, choices=CHAT_TYPE, default=TYPE_DM)
     name = models.CharField(max_length=30, blank=True, null=True)
-    #member = models.ManyToManyField(User)
+    member = models.ManyToManyField(custom_user)
 
 
-class Message ():
+class Message (models.Model):
     MSG_TXT = 'tx'
     MSG_VC = 'vc'
     MSG_MD = 'md'
@@ -25,11 +25,14 @@ class Message ():
         (MSG_TXT, 'Text'),
         (MSG_VC, 'Voice')
     ]
-    # chat = models.ForeignKey(Chat, on_delete=models.SET_NULL, null=True)
-    # sender = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    # replied msg ID
+    chat = models.ForeignKey(Chat, on_delete=models.SET_NULL, null=True)
+    sender = models.ForeignKey(
+        custom_user, on_delete=models.SET_NULL, null=True)
+    # TODO replied msg ID
     type = models.CharField(max_length=10, choices=MSG_TYPE, default=MSG_TXT)
     time = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(blank=False, null=False)
+    seen = models.BooleanField(default=False)
 
     def __str__(self):
         return self.message
