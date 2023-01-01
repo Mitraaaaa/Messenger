@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
   <head>
     <style>
@@ -72,8 +73,9 @@
       <br />
       <br />
     </div>
+    <script src="{% static 'reconnecting-websocket.js' %}"></script>
     <script>
-      const chatSocket = new WebSocket("ws://" + window.location.host + "/");
+      const chatSocket = new ReconnectingWebSocket("ws://" + window.location.host + "/");
       chatSocket.onopen = function (e) {
         console.log("The connection was setup successfully !");
       };
