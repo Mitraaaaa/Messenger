@@ -1,10 +1,10 @@
 from django.urls import path
-from chat import views as chat_views
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 
 urlpatterns = [
-    path("", views.chatPage, name="chat-page"),
+    path("", views.chatPage, name="index"),
+    path('<str:room_name>/', views.room, name='room'),
     # login-section
     path("auth/login/", LoginView.as_view(template_name="login.html"),
          name="login-user"),

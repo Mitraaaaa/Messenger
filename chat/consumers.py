@@ -4,8 +4,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        # TODO create group name
-        self.roomGroupName = "Group_Chat"
+        self.room_name = self.scope['url_route']['kwargs']['room_name']
+        self.roomGroupName = 'chat_%s' % self.room_name
         await self.channel_layer.group_add(
             self.roomGroupName,
             self.channel_name
@@ -22,6 +22,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         username = text_data_json["username"]
+
         await self.channel_layer.group_send(
             self.roomGroupName, {
                 "type": "sendMessage",

@@ -33,7 +33,7 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p>
-    <a href="{% url 'chat-page' %}">Chat Page</a>
+    <a href="{% url 'index' %}">Chat Page</a>
     <br/>
     <a href="{% url 'logout-user' %}"> Home Page</a>
   </p>
