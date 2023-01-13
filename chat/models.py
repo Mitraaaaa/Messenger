@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import custom_user
+from user.models import User
 
 
 class Chat (models.Model):
@@ -13,7 +13,7 @@ class Chat (models.Model):
     ]
     type = models.CharField(max_length=10, choices=CHAT_TYPE, default=TYPE_DM)
     name = models.CharField(max_length=30, blank=True, null=True)
-    member = models.ManyToManyField(custom_user)
+    # member = models.ManyToManyField(custom_user)
 
 
 class Message (models.Model):
@@ -25,9 +25,9 @@ class Message (models.Model):
         (MSG_TXT, 'Text'),
         (MSG_VC, 'Voice')
     ]
-    chat = models.ForeignKey(Chat, on_delete=models.SET_NULL, null=True)
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, null=True)
     sender = models.ForeignKey(
-        custom_user, on_delete=models.SET_NULL, null=True)
+        User, on_delete=models.CASCADE, null=True)
     # TODO replied msg ID
     type = models.CharField(max_length=10, choices=MSG_TYPE, default=MSG_TXT)
     time = models.DateTimeField(auto_now_add=True)
