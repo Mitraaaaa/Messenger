@@ -1,0 +1,105 @@
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
+
+body {
+    text-align: center;
+    background-color: aliceblue;
+}
+
+.container {
+    width: 50vw;
+    margin: 50px auto;
+    padding: 25px 10px;
+    background-color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 5), 0 6px 8px rgba(0, 0, 0, 0.22);
+}
+
+.heading {
+    font-weight: 'Work Sans', sans-serif;
+    font-size: 1.5rem;   
+}
+
+.textinp {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    line-height: 1.2rem;
+    transition: 0.3s;
+    margin-bottom: 40px;
+    width: 50%;
+}
+
+.textinp:focus {
+    outline: none;
+    border-bottom: 2px solid #333;
+    transition: 0.3s;
+}
+
+.btn {
+    background-color: white;
+    color: #9a4ef1;
+    border: 0.16em solid #9a4ef1;
+    border-radius: 2em;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 50%;
+}
+
+.btn:hover {
+    background-color: #9a4ef1;
+    color: white;
+    transition: 0.3s;
+}
+
+.emptyText {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.5rem;
+}
+
+.message {
+    color: white;
+    width: 35%;
+    padding: 8px;
+    border-radius: 2em;
+    margin: 15px 0px;
+    font-family: 'Poppins', sans-serif;
+    font-size: small;
+}
+
+.sender {
+    background-color: #71aeeb;
+    margin-left: auto;
+}
+
+.receiver {
+    background-color: #62bd56;
+}
+
+.leave {
+    background-color: #f5f5f5;
+    border-color: red;
+    color: red;
+    border: 0.16em solid red;
+    border-radius: 2em;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100px;
+    margin: 20px;
+}
+
+.leave:hover {
+    background-color: red;
+    color: white;
+    transition: 0.3s;
+}

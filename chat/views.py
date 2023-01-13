@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import Message, Chat
 
 
 def home(request):
@@ -13,6 +14,16 @@ def chatPage(request, *args, **kwargs):
 
 
 def room(request, room_name):
+    chat = Chat.objects.filter(name=room_name).first()
+    msgs = []
+
+    if chat:
+        msgs = Message.objects.filter(chat=chat)
+    else:
+        chat = Chat(name=room_name, type='Group')
+        chat.save()
+
     return render(request, 'room.html', {
-        'room_name': room_name
+        'room_name': room_name,
+        'msgs': msgs
     })
