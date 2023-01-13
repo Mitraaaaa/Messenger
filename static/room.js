@@ -21,8 +21,17 @@ const chatSocket = new ReconnectingWebSocket(
 chatSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
     const messageElement = document.createElement('div')
+    const loggedInUser = JSON.parse(document.getElementById("username").textContent)
+    console.log(loggedInUser)
+    console.log(data.username)
     messageElement.innerText = data.message
-    messageElement.className = 'message'
+
+    if (data.username === loggedInUser){
+        messageElement.classList.add("message", "sender")
+    }else{
+        messageElement.classList.add("message", "receiver")
+    }
+
     chatLog.appendChild(messageElement)
 
     if(document.querySelector("#emptyText")){

@@ -26,7 +26,8 @@
         <input class= "btn" id="chat-message-submit" type="button" value="Send">
         {{ room_name|json_script:"room-name" }}
     </div>
-
+    
+    {{ request.user.username | json_script:"username"}}
     <script src="{% static 'reconnecting-websocket.js' %}"></script>
 
     <script src="{% static 'room.js' %}"></script>
