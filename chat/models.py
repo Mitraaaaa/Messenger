@@ -25,7 +25,6 @@ class Message (models.Model):
         (MSG_TXT, 'Text'),
         (MSG_VC, 'Voice')
     ]
-    File = models.FileField()
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, null=True)
     sender = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True)
