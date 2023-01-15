@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <title>Chat Room</title>
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+<<<<<<< HEAD
 </head>
 <body>
     <div class="container">
@@ -16,6 +17,47 @@
         <br>
         <h3 class="heading">Enter Room Name: </h3>
         <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br>
+=======
+    <style>
+        .btn{
+            border-radius: 5px;
+            background-color: #A4C79E;
+         
+        }
+        .leave{
+            color: white;
+            text-decoration: none;
+        }
+        .logoutcontainer{
+            padding: 5px;
+            display: flex;
+            flex-direction: row-reverse;
+            
+
+        }
+        .logout{
+            background-color: #990000;
+            border-radius: 2px;
+            padding: 0.2%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+     <!--  {% if request.user.is_authenticated  %}-->
+        <center>
+        <div class="logoutcontainer">
+            <div class="logout">
+                
+            <a class = "leave" href = "{% url 'logout-user' %}">Logout</a>
+            </div>
+        </div>
+        </center>
+       <!-- {% endif %}-->
+        <br>
+        <h3 class="heading">Enter Room Name: </h3>
+        <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
+>>>>>>> parent of 0b51932 (style changes)
         <input class="btn" id="room-name-submit" type="button" value="Enter">
     </div>
     <script src = "{% static 'roomName.js' %}"></script>
