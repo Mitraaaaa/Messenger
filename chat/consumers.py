@@ -54,22 +54,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "username": username
         }))
 
-    async def sendFile(self, Tfile):
-        file = json.loads(Tfile)
-
+    
 
 
     async def Recieve_file(self, Tfile):
         file = json.loads(Tfile)
         f = file(
-            
+
         )
-        await self.channel_layer.group_send(
-            self.roomGroupName, {
-                "type": "sendMessage",
-                "message": message,
-                "username": username,
-            })
 
         
    
