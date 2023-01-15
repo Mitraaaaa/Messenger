@@ -54,6 +54,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "username": username
         }))
 
+    async def sendFile(self, Tfile):
+        Tfile = event["file"]
+        await self.send(=json.dumps({
+            "message": message,
+            "username": username
+        }))
+
     @database_sync_to_async
     def save_msg(sender, chat, text, type):
         return Message.objects.create(sender=sender, chat=chat, text=text, type=type)
