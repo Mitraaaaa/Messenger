@@ -24,17 +24,27 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         username = self.scope["user"].username
+        file = text_data_json["filefield"]
+
 
         # Find Room Object
         room = await database_sync_to_async(Chat.objects.get)(name=self.room_name)
 
-        # Create New Message Object
-        Msg = Message(
-            text = message,
-            chat = room,
-            sender = self.scope['user'],
-            type = 'tx'
-        )
+         # Create New Message Object
+        if file is None :
+            Msg = Message(
+                text = message,
+                chat = room,
+                sender = self.scope['user'],
+                type = 'tx'
+            )
+        else :
+            Msg = Message(
+                attachment = file,
+                chat = room,
+                sender = self.scope['user'],
+                type = 'md'
+            )
 
         await database_sync_to_async(Msg.save)()
 
@@ -54,17 +64,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "username": username
         }))
 
-    
-
-
-    async def Recieve_file(self, Tfile):
-        file = json.loads(Tfile)
-        f = file(
-
-        )
-
-        
-   
 
     @database_sync_to_async
     def save_msg(sender, chat, text, type):

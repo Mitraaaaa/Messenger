@@ -33,6 +33,7 @@ class Message (models.Model):
     time = models.DateTimeField(auto_now_add=True)
     text = models.TextField(blank=False, null=False)
     seen = models.BooleanField(default=False)
-
+    # TODO upload_tool must be added
+    attachment = models.FileField()
     def __str__(self):
         return self.message
