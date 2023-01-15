@@ -14,7 +14,6 @@
         .leave{
             color: white;
             text-decoration: none;
-            margin: 0.3%;
         }
         .logoutcontainer{
             padding: 5px;
@@ -26,37 +25,26 @@
         .logout{
             background-color: #990000;
             border-radius: 2px;
-            padding: 5%;
-        }
-        .container{
-            border-color: black;
-            border-radius: 5px;
-            background-color: #F5E9CD;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 5% 20% 5% 20%;
+            padding: 0.2%;
         }
     </style>
 </head>
 <body>
     <div class="container">
      <!--  {% if request.user.is_authenticated  %}-->
-        
-       <!-- {% endif %}-->
-        <br>
-        <div class="container">
-            <h3 class="heading">Enter Room Name: </h3>
-        <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
-        <input class="btn" id="room-name-submit" type="button" value="Enter">
-        </div>
+        <center>
         <div class="logoutcontainer">
             <div class="logout">
                 
             <a class = "leave" href = "{% url 'logout-user' %}">Logout</a>
             </div>
         </div>
+        </center>
+       <!-- {% endif %}-->
+        <br>
+        <h3 class="heading">Enter Room Name: </h3>
+        <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
+        <input class="btn" id="room-name-submit" type="button" value="Enter">
     </div>
     <script src = "{% static 'roomName.js' %}"></script>
 </body>
