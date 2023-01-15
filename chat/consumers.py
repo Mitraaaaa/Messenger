@@ -55,11 +55,24 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
     async def sendFile(self, Tfile):
-        Tfile = event["file"]
-        await self.send(=json.dumps({
-            "message": message,
-            "username": username
-        }))
+        file = json.loads(Tfile)
+
+
+
+    async def Recieve_file(self, Tfile):
+        file = json.loads(Tfile)
+        f = file(
+            
+        )
+        await self.channel_layer.group_send(
+            self.roomGroupName, {
+                "type": "sendMessage",
+                "message": message,
+                "username": username,
+            })
+
+        
+   
 
     @database_sync_to_async
     def save_msg(sender, chat, text, type):
