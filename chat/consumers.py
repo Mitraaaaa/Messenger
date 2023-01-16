@@ -24,27 +24,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         username = self.scope["user"].username
-        file = text_data_json["filefield"]
-
 
         # Find Room Object
         room = await database_sync_to_async(Chat.objects.get)(name=self.room_name)
 
-         # Create New Message Object
-        if file is None :
-            Msg = Message(
-                text = message,
-                chat = room,
-                sender = self.scope['user'],
-                type = 'tx'
-            )
-        else :
-            Msg = Message(
-                attachment = file,
-                chat = room,
-                sender = self.scope['user'],
-                type = 'md'
-            )
+        # Create New Message Object
+        Msg = Message(
+            text = message,
+            chat = room,
+            sender = self.scope['user'],
+            type = 'tx'
+        )
 
         await database_sync_to_async(Msg.save)()
 
@@ -58,13 +48,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def sendMessage(self, event):
         message = event["message"]
         username = event["username"]
-        # await self.save_msg(self.scope['user'], self.room_name, message, 'tx')
         await self.send(text_data=json.dumps({
             "message": message,
             "username": username
         }))
-
-
-    @database_sync_to_async
-    def save_msg(sender, chat, text, type):
-        return Message.objects.create(sender=sender, chat=chat, text=text, type=type)

@@ -55,22 +55,12 @@ document.querySelector('#chat-message-submit').onclick = function(e) {
     const messageInputDom = document.querySelector('#chat-message-input');
     const message = messageInputDom.value;
 
-    // TODO add queryselector field after creating html 
-    const file = document.querySelector().files[0]
-
     // Send the msg object as a JSON-formatted string.
     chatSocket.send(JSON.stringify({
         'message': message,
-        'username' : "{{request.user.username}}",
-        'filefield' : get_base64(file)}
+        'username' : "{{request.user.username}}"}
     ));
 
     // Blank the text input element, ready to receive the next line of text from the user.
     messageInputDom.value = '';
 };
-
-function get_base64(file){
-    var reader= new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = function(){console.log("Converted")}
-}
