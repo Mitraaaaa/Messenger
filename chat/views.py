@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Message, Chat
-from .forms import upload_file
+# from .forms import upload_file
 
 
 def home(request):
@@ -30,9 +30,9 @@ def room(request, room_name):
     })
 
 # remmeber to creat a buttton for uploading the file
-def UploadFile(request):
-    if request.method == "POST" :
-        form = upload_file(request.POST, request.FILES)
-    else :
-       form= upload_file()
-    return render(request,'file_transfer.html',{"form" : form})
+# def UploadFile(request):
+#     if request.method == "POST" :
+#         form = upload_file(request.POST, request.FILES)
+#     else :
+#        form= upload_file()
+#     return render(request,'file_transfer.html',{"form" : form})

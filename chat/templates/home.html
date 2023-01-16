@@ -1,58 +1,31 @@
-<style>
-  p {
-    font-size: 45px;
-    font-style: normal;
-    text-align: center;
-    padding: 20px;
-  }
+<!DOCTYPE html>
+{% load static%}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="{% static 'home.css' %}" type="text/css">
 
-  body {
-    background-color: aliceblue;
-    text-align: center;
-  }
+</head>
+<body>
+  {% block content %}
+  {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p>
+      <a href="{% url 'index' %}">Chat Page</a>
+      <br/>
+      <a href="{% url 'logout-user' %}"> Home Page</a>
+    </p>
+  
+  
+  {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'sign_up' %}">Sign Up</a>
+    <a href="{% url 'login' %}">Log In</a>
+  {% endif %}
+  {% endblock %}
+</body>
+</html>
 
-  a {
-    width: 20px;
-    align-items: center;
-    width: 30%;
-    padding: 10px;
-    margin: 50px;
-  }
-
-  btn.button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  width: 100%;
-  }
-
-  a:link { text-decoration: none; }
-  a:visited { text-decoration: none; }
-  a:hover { text-decoration: none; }
-  a:active { text-decoration: none; }
-</style>
-
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p>
-    <a href="{% url 'index' %}">Chat Page</a>
-    <br/>
-    <a href="{% url 'logout-user' %}"> Home Page</a>
-  </p>
-
-
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'sign_up' %}">Sign Up</a>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %}
