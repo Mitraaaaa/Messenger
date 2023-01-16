@@ -1,3 +1,4 @@
+{% load static%}
 <!DOCTYPE html>
 <!--{% load static%}-->
 <html>
@@ -32,11 +33,9 @@
         }
     </style>
 </head>
-<body>
+<body>   
+    <h1><img class="profile-pic" src="{% static '/images/abstract-user.png' %}" alt="Profile Picture">   Hello, {{request.user}}!</h1>
     <div class="container">
-     <!--  {% if request.user.is_authenticated  %}-->
-        
-       <!-- {% endif %}-->
         <br>
         <div class="container">
             <h3 class="heading">Enter Room Name: </h3>
