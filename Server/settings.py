@@ -51,6 +51,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Server.urls'
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'Server.forms.SignupForm'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -127,12 +129,24 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+
+
 # Put email verification -> allauth
-EMAIL_BACKEND = 'django.core.mail.backends.console.Emailbackend'
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 LOGIN_REDIRECT_URL = "index"
 #ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+
+#--------------------------
+#reset password
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'samanomidi55@gmail.com'
+EMAIL_HOST_PASSWORD = "clqgpjqnsvvvvobl"
+EMAIL_USE_TLS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

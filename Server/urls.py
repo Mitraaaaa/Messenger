@@ -12,8 +12,11 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
     # signup-section
-    path('sign_up/' , views.sign_up , name='sign_up'),
-    path('create_user/', views.create_user),
+    path('accounts/signup' , views.sign_up , name='account_signup'),
+
+    
+    #allauth
+    path('accounts/' , include('allauth.urls')),
 
 ]
 
