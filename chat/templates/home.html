@@ -4,6 +4,11 @@
     <meta charset="utf-8"/>
     <title>Home Page</title>
     <style>
+      body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       p {
         font-size: 45px;
         font-style: normal;
@@ -83,7 +88,7 @@
   {% block content %}
   {% if user.is_authenticated %}
     Hi {{ user.username }}! -->
-   <body>
+   <body >
     <div class="bodyContainer">
       <p>
         <a class="link1" href="{% url 'index' %}">Chat Page</a>

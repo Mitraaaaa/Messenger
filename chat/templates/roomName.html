@@ -6,6 +6,12 @@
     <title>Chat Room</title>
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
     <style>
+        body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+      }
         .btn{
             border-radius: 26px;
             background-color: #F7F5F1;
@@ -66,10 +72,17 @@
             border-bottom: 1px solid #000000;
             background-color: #F7F5F1;
         }
+        .bodyContainer{
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          background-color: #F7F5F1;
+          margin: 10%;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="bodyContainer">
      <!--  {% if request.user.is_authenticated  %}-->
         
        <!-- {% endif %}-->
