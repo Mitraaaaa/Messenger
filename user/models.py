@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from chat.models import Chat
 
 
 class custom_user (models.Model):
@@ -9,6 +8,7 @@ class custom_user (models.Model):
     image = models.ImageField(default='abstract-user.png', null= True, blank=True)
     gender = models.CharField(max_length=20)
     phone_number = models.CharField(max_length=100, unique=True)
+    chats = models.ForeignKey(Chat, on_delete=models.CASCADE, null=True)
 
 # @receiver(post_save, sender=User)
 # def create_custom_user(sender, instance, created, **kwargs):

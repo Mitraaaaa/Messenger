@@ -19,7 +19,7 @@
     <div class="container">
         <div id="chat-log">
             {% for msg in msgs.all %}
-                {% if msg.sender.username == request.user.username %}
+                {% if msg.sender == request.user.username %}
                     <div class="message sender">
                         {{msg.text}}
                     </div>
