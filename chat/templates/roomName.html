@@ -1,65 +1,54 @@
+{% load static%}
 <!DOCTYPE html>
+<!--{% load static%}-->
 <html>
 <head>
     <meta charset="utf-8"/>
     <title>Chat Room</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
     <style>
+        .btn{
+            border-radius: 5px;
+            background-color: #A4C79E;
+         
+        }
 
-        
-body {
-    text-align: center;
-    background-color: aliceblue;  
-}
+        .logoutcontainer{
+            padding: 5px;
+            display: flex;
+            flex-direction: row-reverse;
+            
 
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  width: 100%;
-}
+        }
 
-button:hover {
-    opacity: 0.8;
-}
-
-input{
-        width: 60%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        box-sizing: border-box;
-  }
-
+        .container{
+            border-color: black;
+            border-radius: 5px;
+            background-color: #F5E9CD;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5% 20% 5% 20%;
+        }
     </style>
 </head>
-<body>
-    {% if request.user.is_authenticated  %}
-    <center>
-      <a href = "{% url 'logout-user' %}">Logout</a>
-    </center>
-    {% endif %}
-    <br>
-    <input id="room-name-input" type="text" size="100" placeholder="Group Name"><br>
-    <input id="room-name-submit" type="button" value="Enter">
-
-    <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
-
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
-        };
-    </script>
+<body>   
+    <h1><img class="profile-pic" src="{% static '/images/abstract-user.png' %}" alt="Profile Picture">   Hello, {{request.user}}!</h1>
+    <div class="container">
+        <br>
+        <div class="container">
+            <h3 class="heading">Enter Room Name: </h3>
+        <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
+        <input class="btn" id="room-name-submit" type="button" value="Enter">
+        </div>
+        <div class="logoutcontainer">
+            <div class="logout">
+                
+            <a class = "leave" href = "{% url 'logout-user' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+    <script src = "{% static 'roomName.js' %}"></script>
 </body>
 </html>

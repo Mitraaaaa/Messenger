@@ -5,110 +5,42 @@
 <head>
     <meta charset="utf-8"/>
     <title>Chat Room</title>
-
-    <style>
-    button:hover {
-          opacity: 0.8;
-      }
-
-      input{
-        width: 50%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-        box-sizing: border-box;
-  }
-        body {
-          text-align: center;
-          background-color: aliceblue;
-      }
-        button {
-          background-color: #04AA6D;
-          color: white;
-          padding: 14px 20px;
-          margin: 8px 0;
-          border: none;
-          border-radius: 30px;
-          cursor: pointer;
-          width: 100%;
-      }
-
-      a {
-    border: 3px solid #000;
-    background-color: rgb(223, 140, 140);
-    border-radius: 10px;
-    width: 20px;
-    align-items: center;
-    width: 30%;
-    margin: 10px;
-    padding: 10px;
-  }
-
-  a:link { text-decoration: none; }
-  a:visited { text-decoration: none; }
-  a:hover { text-decoration: none; }
-  a:active { text-decoration: none; }
-    </style>
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
 </head>
 <body>
-    <center><h1>Hello , {{request.user}}!</h1></center>
     <br>
     {% if request.user.is_authenticated  %}
     <center>
-      <a href = "{% url 'logout-user' %}">Logout</a>
-      <a href="{% url 'index' %}">Back</a>
+      <a class="leave" href = "{% url 'logout-user' %}">Logout</a>
+      <a class="leave" href="{% url 'index' %}">Back</a>
     </center>
     {% endif %}
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
+
+    <div class="container">
+        <div id="chat-log">
+            {% for msg in msgs.all %}
+                {% if msg.sender.username == request.user.username %}
+                    <div class="message sender">
+                        {{msg.text}}
+                    </div>
+                {% else %}
+                    <div class="message receiver">
+                        {{msg.text}}
+                    </div>   
+                {% endif %}
+            {% endfor %}     
+        </div>
+    </div>
+
+    <div>
+        <input class = "textinp" id="chat-message-input" type="text" size="100"><br>
+        <input class= "btn" id="chat-message-submit" type="button" value="Send">
+        {{ room_name|json_script:"room-name" }}
+    </div>
+
+    {{ request.user.username | json_script:"username"}}
     <script src="{% static 'reconnecting-websocket.js' %}"></script>
 
-    <script>
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
-        const chatSocket = new ReconnectingWebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/chat/'
-            + roomName
-            + '/'
-        );
-
-        // Called when a message is received from the server.
-        chatSocket.onmessage = function (e) {
-            const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.username + ":" + data.message + '\n');
-        };
-
-        // Called when the connection is closed.
-        chatSocket.onclose = function(e) {
-            console.error('Chat socket closed unexpectedly');
-        };
-
-        document.querySelector('#chat-message-input').focus();
-        document.querySelector('#chat-message-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#chat-message-submit').click();
-            }
-        };
-
-        document.querySelector('#chat-message-submit').onclick = function(e) {
-            const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-
-            // Send the msg object as a JSON-formatted string.
-            chatSocket.send(JSON.stringify({
-                'message': message,
-                'username' : "{{request.user.username}}"}
-            ));
-
-            // Blank the text input element, ready to receive the next line of text from the user.
-            messageInputDom.value = '';
-        };
-    </script>
+    <script src="{% static 'room.js' %}"></script>
 </body>
 </html>

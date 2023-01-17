@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -31,7 +32,12 @@ INSTALLED_APPS = [
     'user',
     'channels',
     'Server',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,8 +66,6 @@ TEMPLATES = [
         },
     },
 ]
-LOGIN_REDIRECT_URL = "index"
-LOGOUT_REDIRECT_URL = "home"
 
 ASGI_APPLICATION = 'Server.asgi.application'
 
@@ -79,7 +83,8 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'user.authentication.PhoneAuthBackend'
+    'user.authentication.PhoneAuthBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # Password validation
@@ -122,6 +127,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# Put email verification -> allauth
+EMAIL_BACKEND = 'django.core.mail.backends.console.Emailbackend'
+LOGIN_REDIRECT_URL = "index"
+#ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
+ACCOUNT_EMAIL_REQUIRED = True
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -133,3 +145,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 }
+
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
