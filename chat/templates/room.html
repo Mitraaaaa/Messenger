@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-{% load static %}
-
+<!--{% load static %}
+-->
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -10,36 +10,36 @@
 <body>
     <center><h1>Hello , {{request.user}}!</h1></center>
     <br>
-    {% if request.user.is_authenticated  %}
+   <!--{% if request.user.is_authenticated  %}--> 
     <center>
       <a class="leave" href = "{% url 'logout-user' %}">Logout</a>
       <a class="leave" href="{% url 'index' %}">Back</a>
     </center>
-    {% endif %}
-
+    <!-- {% endif %} -->
     <div class="container">
         <div id="chat-log">
+            <!--
             {% for msg in msgs.all %}
-                {% if msg.sender.username == request.user.username %}
+                {% if msg.sender.username == request.user.username %}-->
                     <div class="message sender">
-                        {{msg.text}}
+                        <!-- {{msg.text}} -->
                     </div>
-                {% else %}
+                <!-- {% else %} -->
                     <div class="message receiver">
-                        {{msg.text}}
+                        <!-- {{msg.text}} -->
                     </div>   
-                {% endif %}
-            {% endfor %}     
+                <!-- {% endif %}
+            {% endfor %}      -->
         </div>
     </div>
 
     <div>
         <input class = "textinp" id="chat-message-input" type="text" size="100"><br>
         <input class= "btn" id="chat-message-submit" type="button" value="Send">
-        {{ room_name|json_script:"room-name" }}
+        <!-- {{ room_name|json_script:"room-name" }} -->
     </div>
 
-    {{ request.user.username | json_script:"username"}}
+    <!-- {{ request.user.username | json_script:"username"}} -->
     <script src="{% static 'reconnecting-websocket.js' %}"></script>
 
     <script src="{% static 'room.js' %}"></script>
