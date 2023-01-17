@@ -12,7 +12,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 
     # signup-section
-    path('accounts/signup' , views.sign_up , name='account_signup'),
+    path('signup/' , views.sign_up , name='account_signup'),
 
     
     #allauth
@@ -20,4 +20,4 @@ urlpatterns = [
 
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

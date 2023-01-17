@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
+from user.models import custom_user
 
 class SignupForm(forms.Form):
     first_name = forms.CharField(max_length=30 , label='First Name')
@@ -10,3 +12,4 @@ class SignupForm(forms.Form):
         user.last_name = self.cleaned_data['last_name']
         user.phone_number = self.cleaned_data['phone_number']
         user.save()
+

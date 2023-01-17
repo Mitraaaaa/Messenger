@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Message, Chat
+import json
 # from .forms import upload_file
 
 
@@ -11,6 +12,8 @@ def chatPage(request, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect("login-user")
     context = {}
+    # friends = json.loads("friends.json")
+    # friends_list = friends[request.user]
     return render(request, "roomName.html", context)
 
 
