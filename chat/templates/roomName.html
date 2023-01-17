@@ -15,6 +15,10 @@
             color: #A738BD;
          
         }
+        .btn:hover{
+            background-color: #ecd4ef;
+            cursor: pointer;
+        }
         .leave{
             color: red;
             text-decoration: none;
@@ -28,7 +32,15 @@
             border:1px solid  red;
             border-radius: 26px;
             width: 20%;
-
+            color: red;
+            text-decoration: none;
+            margin: 0.3%;
+            padding: 6px;
+        }
+        .logoutcontainer:hover{
+            
+            cursor: pointer;
+            background-color: #f4d5d5;
         }
         .logout{
             background-color: #F7F5F1;
@@ -67,12 +79,8 @@
         <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
         <input class="btn" id="room-name-submit" type="button" value="Enter">
         </div>
-        <div class="logoutcontainer">
-            <div class="logout">
-                
-            <a class = "leave" href = "{% url 'logout-user' %}">Logout</a>
-            </div>
-        </div>
+        <input class="logoutcontainer" id="logout" type="button" value="Logout">
+        
     </div>
     <script src = "{% static 'roomName.js' %}"></script>
 </body>
