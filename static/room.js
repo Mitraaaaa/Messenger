@@ -1,3 +1,6 @@
+var messageBody = document.querySelector('#chat-log');
+messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
 const chatLog = document.querySelector("#chat-log")
 const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
@@ -37,6 +40,9 @@ chatSocket.onmessage = function (e) {
     if(document.querySelector("#emptyText")){
         document.querySelector("#emptyText").remove()
     }
+
+    var messageBody = document.querySelector('#chat-log');
+    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 };
 
 // Called when the connection is closed.

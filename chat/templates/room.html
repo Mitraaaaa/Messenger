@@ -6,6 +6,20 @@
     <meta charset="utf-8"/>
     <title>Chat Room</title>
     <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css">
+    <style>
+        #chat-log {
+            overflow-y: scroll;
+            height: 350px;
+        }
+        .container {
+            width: 50%;
+        }
+        .leave {
+            margin: 10px;
+            margin-bottom: 0px;
+        }
+
+    </style>
 </head>
 <body>
     <br>
@@ -32,7 +46,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="inputs">
         <input class = "textinp" id="chat-message-input" type="text" size="100"><br>
         <input class= "btn" id="chat-message-submit" type="button" value="Send">
         {{ room_name | json_script:"room-name" }}
