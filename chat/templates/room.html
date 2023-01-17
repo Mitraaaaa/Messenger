@@ -35,7 +35,7 @@
     <div>
         <input class = "textinp" id="chat-message-input" type="text" size="100"><br>
         <input class= "btn" id="chat-message-submit" type="button" value="Send">
-        {{ room_name|json_script:"room-name" }}
+        {{ room_name | json_script:"room-name" }}
     </div>
 
     {{ request.user.username | json_script:"username"}}

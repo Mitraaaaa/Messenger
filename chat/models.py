@@ -3,7 +3,6 @@ from django.db import models
 
 class Chat (models.Model):
     name = models.CharField(max_length=30, blank=True, null=True)
-    type = models.CharField(max_length=10, default='Group')
 
 
 class Message (models.Model):
