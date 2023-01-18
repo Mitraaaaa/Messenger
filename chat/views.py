@@ -19,12 +19,21 @@ def chatPage(request, *args, **kwargs):
 
 def room(request, room_name):
     x = room_name.split("_")
-    chat = Chat.objects.filter(name=room_name).first()
+    if x[0] == 'Group' or x[1] == 'Channel':
+        chat = Chat.objects.filter(name=room_name).first()
+    else:
+        if Chat.objects.filter(name=room_name).exists():
+            print(room_name, "found")
+            chat = Chat.objects.filter(name=room_name).first()
+        else:
+            print(room_name, " not found")
+            chat = Chat.objects.filter(name=f'{x[1]}_{x[0]}').first()
     msgs = []
 
     if chat:
         msgs = Message.objects.filter(chat=chat)
     else:
+        print('creating new chatRoom', room_name)
         chat = Chat(name=room_name)
         chat.save()
 
@@ -32,11 +41,3 @@ def room(request, room_name):
         'room_name': room_name,
         'msgs': msgs
     })
-
-# remmeber to creat a buttton for uploading the file
-# def UploadFile(request):
-#     if request.method == "POST" :
-#         form = upload_file(request.POST, request.FILES)
-#     else :
-#        form= upload_file()
-#     return render(request,'file_transfer.html',{"form" : form})
