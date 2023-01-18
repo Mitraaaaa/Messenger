@@ -1,3 +1,6 @@
+var messageBody = document.querySelector('#chat-log');
+messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
 const chatLog = document.querySelector("#chat-log")
 const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
@@ -37,6 +40,9 @@ chatSocket.onmessage = function (e) {
     if(document.querySelector("#emptyText")){
         document.querySelector("#emptyText").remove()
     }
+
+    var messageBody = document.querySelector('#chat-log');
+    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 };
 
 // Called when the connection is closed.
@@ -58,8 +64,8 @@ document.querySelector('#chat-message-submit').onclick = function(e) {
     // Send the msg object as a JSON-formatted string.
     chatSocket.send(JSON.stringify({
         'message': message,
-        'username' : "{{request.user.username}}"}
-    ));
+        'username' : "{{request.user.username}}"
+    }));
 
     // Blank the text input element, ready to receive the next line of text from the user.
     messageInputDom.value = '';

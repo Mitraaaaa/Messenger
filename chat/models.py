@@ -1,17 +1,7 @@
 from django.db import models
-from user.models import User
 
 
 class Chat (models.Model):
-    TYPE_DM = 'DM'
-    TYPE_GP = 'GP'
-    TYP_CH = 'CH'
-    CHAT_TYPE = [
-        (TYPE_DM, 'Private'),
-        (TYPE_GP, 'Group'),
-        (TYP_CH, 'Channel')
-    ]
-    type = models.CharField(max_length=10, choices=CHAT_TYPE, default=TYPE_DM)
     name = models.CharField(max_length=30, blank=True, null=True)
 
 
@@ -22,12 +12,10 @@ class Message (models.Model):
         (MSG_MD, 'Media'),
         (MSG_TXT, 'Text'),
     ]
+    sender = models.CharField(max_length=200, null=True)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, null=True)
-    sender = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True)
     type = models.CharField(max_length=10, choices=MSG_TYPE, default=MSG_TXT)
     time = models.DateTimeField(auto_now_add=True)
     text = models.TextField(blank=False, null=False)
     seen = models.BooleanField(default=False)
-    # TODO upload_tool must be added
-    # attachment = models.FileField()
+

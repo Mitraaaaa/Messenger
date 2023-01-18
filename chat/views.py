@@ -18,13 +18,14 @@ def chatPage(request, *args, **kwargs):
 
 
 def room(request, room_name):
+    x = room_name.split("_")
     chat = Chat.objects.filter(name=room_name).first()
     msgs = []
 
     if chat:
         msgs = Message.objects.filter(chat=chat)
     else:
-        chat = Chat(name=room_name, type='Group')
+        chat = Chat(name=room_name)
         chat.save()
 
     return render(request, 'room.html', {

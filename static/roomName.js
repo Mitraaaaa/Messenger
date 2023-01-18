@@ -8,5 +8,5 @@ document.querySelector('#room-name-input').onkeyup = function(e) {
 document.querySelector('#room-name-submit').onclick = function(e) {
     var roomName = document.querySelector('#room-name-input').value;
     var roomType = document.querySelector('#select1').value;
-    window.location.pathname = '/chat/' + roomType +roomName + '/';
+    window.location.pathname = '/chat/' + roomType + "_" + roomName + '/';
 };
