@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("", views.chatPage, name="index"),
+    #path('account/<str:username>', name='account'),
     path('<str:room_name>/', views.room, name='room'),
     # login-section
     path("auth/login/", LoginView.as_view(template_name="login.html"),
