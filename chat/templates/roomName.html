@@ -54,6 +54,7 @@
             </div>
         </div>
     </div>
+    {{ request.user.username|json_script:"user_id" }}
     <script src = "{% static 'roomName.js' %}"></script>
 </body>
 </html>
