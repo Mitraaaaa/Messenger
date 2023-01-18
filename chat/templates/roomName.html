@@ -39,13 +39,18 @@
         <br>
         <div class="container">
             <h3 class="heading">Enter Room Name: </h3>
-        <input class="textinp" id="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
-            <select id="select1">
+            {% if notice %}
+                <p>{{notice}}<br>{{action}}</p>
+            {% endif %}
+        <form action="../validateUser/" method="post">
+            {% csrf_token %}
+            <input class="textinp" id="room-name-input" name="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
+            <select id="select1" name="select1">
                 <option value="Channel">Channel</option>
                 <option value="Group">Group</option>
                 <option value="Private">Private</option>
-            </select>
-        <input class="btn" id="room-name-submit" type="button" value="Enter">
+            </select>        
+        <input class="btn" id="room-name-submit" type="submit" value="Enter">
         </div>
         <div class="logoutcontainer">
             <div class="logout">
@@ -53,6 +58,7 @@
             <a class = "leave" href = "{% url 'logout-user' %}">Logout</a>
             </div>
         </div>
+        </form>        
     </div>
     {{ request.user.username|json_script:"user_id" }}
     <script src = "{% static 'roomName.js' %}"></script>
