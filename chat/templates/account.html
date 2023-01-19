@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'account.css' %}" type="text/css">
+
+    <title>User Profile</title>
+</head>
+<body>
+    <div style="text-align: center; border: 2px solid;">
+        <h1>{{user.username}}'s Profile</h1>
+        <h3>
+        <img style="vertical-align: middle; width: 10%; height: 10%;" src="{% static '/images/abstract-user.png' %}" alt="User Profile">
+        <br>
+        <p><b> Username: </b>{{ user.username }}</p><br>
+        <p>Email: {{ user.email }}</p><br>
+        <p>Join Date: {{ user.last_login }}</p><br>
+        <p style="display: inline;"> User Status: </p><p style="color: yellowgreen; display: inline;">Online</p><br>
+    </h3>
+    </div>
+    <br>
+    <button class="delete" id="delete-account">Delete Account</button>
+    <button class="back" id="back-to-roomName">Back</button>
+    {{ request.user.username|json_script:"user_id" }}
+
+    <script>
+        document.querySelector('#back-to-roomName').onclick = function(e) {
+            window.location.pathname = '/chat/';
+        };
+        document.querySelector('#delete-account').onclick = function(e) {
+            const user_id = JSON.parse(document.getElementById('user_id').textContent);
+
+            if (confirm('Are you sure you want to DELETE your account?')) {
+                window.location.pathname = '/chat/account/' + user_id + '/delete/';
+            } else {
+                alert("Nice Choice!")
+            }
+        }
+
+    </script>
+</body>
+</html>

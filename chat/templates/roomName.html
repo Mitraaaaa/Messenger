@@ -35,6 +35,9 @@
 </head>
 <body>   
     <h1><img class="profile-pic" src="{% static '/images/abstract-user.png' %}" alt="Profile Picture">   Hello, {{request.user}}!</h1>
+    <button id = "account-info-button" class="btn" style="width: 15%;">
+        Access Profile
+    </button>
     <div class="container">
         <br>
         <div class="container">
@@ -44,7 +47,7 @@
             {% endif %}
         <form action="../validateUser/" method="post">
             {% csrf_token %}
-            <input class="textinp" id="room-name-input" name="room-name-input" type="text" size="100" placeholder="Group Name"><br><br>
+            <input class="textinp" id="room-name-input" name="room-name-input" type="text" size="100" placeholder="Group Name" style="background-color: #F5E9CD;"><br><br>
             <select id="select1" name="select1">
                 <option value="Channel">Channel</option>
                 <option value="Group">Group</option>

@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Message, Chat
-import json
-# from .forms import upload_file
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -12,8 +11,6 @@ def chatPage(request, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect("login-user")
     context = {}
-    # friends = json.loads("friends.json")
-    # friends_list = friends[request.user]
     return render(request, "roomName.html", context)
 
 
@@ -41,3 +38,16 @@ def room(request, room_name):
         'room_name': room_name,
         'msgs': msgs
     })
+
+
+def account(request, username):
+    return render(request, 'account.html', {})
+
+
+def deleteAcc(request, username):
+    u = User.objects.filter(username=username)
+    if u.exists():
+        u.delete()
+        return render(request, 'home.html', {}) 
+    else:
+        print("Unknown Error!") 
