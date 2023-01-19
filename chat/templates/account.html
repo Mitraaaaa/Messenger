@@ -13,12 +13,18 @@
     <div style="text-align: center; border: 2px solid;">
         <h1>{{user.username}}'s Profile</h1>
         <h3>
-        <img style="vertical-align: middle; width: 10%; height: 10%;" src="{% static '/images/abstract-user.png' %}" alt="User Profile">
-        <br>
-        <p><b> Username: </b>{{ user.username }}</p><br>
-        <p>Email: {{ user.email }}</p><br>
-        <p>Join Date: {{ user.last_login }}</p><br>
-        <p style="display: inline;"> User Status: </p><p style="color: yellowgreen; display: inline;">Online</p><br>
+        <img style="vertical-align: middle; width: 10%; height: 10%;" src="{% static '/images/abstract-user.png' %}" alt="User Profile"><br>
+        <button> Change Profile Picture</button>
+        <p>Name: {{user.first_name}}</p>
+        <input type="text" id="input-firstname"><Button style="display: inline;" id="edit-fname">Edit First Name</Button>
+        <p>Last Name: {{user.last_name}}</p>
+        <input type="text" id="input-lastname"><Button style="display: inline;" id="edit-lname">Edit Last Name</Button>
+        <p><b> Username: </b>{{ user.username }}</p>
+        <input type="text" id="input-username"><Button style="display: inline;" id="edit-username">Edit Username</Button>
+        <p>Email: {{ user.email }}</p>
+        <input type="text" id = "input-email"><Button style="display: inline;" id="edit-email">Edit Email</Button>
+        <p>Join Date: {{ user.date_joined }}</p>
+        <p style="display: inline;"> User Status: </p><p style="color: yellowgreen; display: inline;">Online</p>
     </h3>
     </div>
     <br>
@@ -27,11 +33,13 @@
     {{ request.user.username|json_script:"user_id" }}
 
     <script>
+        const user_id = JSON.parse(document.getElementById('user_id').textContent);
+
         document.querySelector('#back-to-roomName').onclick = function(e) {
             window.location.pathname = '/chat/';
         };
+
         document.querySelector('#delete-account').onclick = function(e) {
-            const user_id = JSON.parse(document.getElementById('user_id').textContent);
 
             if (confirm('Are you sure you want to DELETE your account?')) {
                 window.location.pathname = '/chat/account/' + user_id + '/delete/';
@@ -39,6 +47,44 @@
                 alert("Nice Choice!")
             }
         }
+        document.querySelector('#edit-fname').onclick = function(e) {
+            const messageInputDom = document.querySelector('#input-firstname');
+            const new_name = messageInputDom.value;
+            if (new_name.length == 0){
+                alert("New Username cannot be blank")
+            }else{
+                window.location.pathname = '/chat/account/' + user_id + '/edit-first-name/' + new_name + '/';
+            }
+        };
+        document.querySelector('#edit-lname').onclick = function(e) {
+            const messageInputDom = document.querySelector('#input-lastname');
+            const new_lname = messageInputDom.value;
+            if (new_lname.length == 0){
+                alert("New Username cannot be blank")
+            }else{
+                window.location.pathname = '/chat/account/' + user_id + '/edit-last-name/' + new_lname + '/';
+            }
+        };
+
+        document.querySelector('#edit-username').onclick = function(e) {
+            const messageInputDom = document.querySelector('#input-username');
+            const new_username = messageInputDom.value;
+            if (new_username.length == 0){
+                alert("New Username cannot be blank")
+            }else{
+                window.location.pathname = '/chat/account/' + user_id + '/edit-username/' + new_username + '/';
+            }
+        };
+
+        document.querySelector('#edit-email').onclick = function(e) {
+            const messageInputDom = document.querySelector('#input-email');
+            const new_email = messageInputDom.value;
+            if (new_email.length == 0){
+                alert("New Email cannot be blank")
+            }else{
+                window.location.pathname = '/chat/account/' + user_id + '/edit-email/' + new_email + '/';
+            }
+        };
 
     </script>
 </body>

@@ -48,6 +48,44 @@ def deleteAcc(request, username):
     u = User.objects.filter(username=username)
     if u.exists():
         u.delete()
-        return render(request, 'home.html', {}) 
+        return render(request, 'home.html', {})
     else:
-        print("Unknown Error!") 
+        print("Unknown Error!")
+
+
+def editFirstName(request, username, new_fname):
+    u = User.objects.get(username=username)
+    u.first_name = new_fname
+    u.save()
+    return render(request, 'roomName.html', {})
+
+
+
+def editLastName(request, username, new_lname):
+    u = User.objects.get(username=username)
+    u.last_name = new_lname
+    u.save()
+    return render(request, 'roomName.html', {})
+
+
+
+def editUsername(request, username, new_username):
+    if User.objects.filter(username=new_username).exists():
+        print("Username has been used!")
+    else:
+        u = User.objects.filter(username=username).first()
+        u.username = new_username
+        u.save()
+
+    return render(request, 'roomName.html', {})
+
+
+def editEmail(request, username, new_email):
+    if User.objects.filter(email=new_email).exists():
+        print("Email has been used!")
+    else:
+        u = User.objects.filter(username=username).first()
+        u.email = new_email
+        u.save()
+
+    return render(request, 'roomName.html', {})

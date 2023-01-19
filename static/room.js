@@ -60,13 +60,16 @@ document.querySelector('#chat-message-input').onkeyup = function(e) {
 document.querySelector('#chat-message-submit').onclick = function(e) {
     const messageInputDom = document.querySelector('#chat-message-input');
     const message = messageInputDom.value;
+    if (message.length != 0){
+        // Send the msg object as a JSON-formatted string.
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username' : "{{request.user.username}}"
+        }));
 
-    // Send the msg object as a JSON-formatted string.
-    chatSocket.send(JSON.stringify({
-        'message': message,
-        'username' : "{{request.user.username}}"
-    }));
-
-    // Blank the text input element, ready to receive the next line of text from the user.
-    messageInputDom.value = '';
+        // Blank the text input element, ready to receive the next line of text from the user.
+        messageInputDom.value = '';
+    }else {
+        alert('Type Something pls :/')
+    }
 };
