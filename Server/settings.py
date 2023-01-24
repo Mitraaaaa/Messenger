@@ -163,3 +163,8 @@ CHANNEL_LAYERS = {
 MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
+ALLOWED_HOSTS =[
+    '*'
+]

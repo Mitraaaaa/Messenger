@@ -10,6 +10,7 @@ def home(request):
 def chatPage(request, *args, **kwargs):
     if not request.user.is_authenticated:
         return redirect("login-user")
+
     context = {}
     return render(request, "roomName.html", context)
 
@@ -25,6 +26,7 @@ def room(request, room_name):
         else:
             print(room_name, " not found")
             chat = Chat.objects.filter(name=f'{x[1]}_{x[0]}').first()
+            room_name = f'{x[1]}_{x[0]}'
     msgs = []
 
     if chat:
@@ -60,13 +62,11 @@ def editFirstName(request, username, new_fname):
     return render(request, 'roomName.html', {})
 
 
-
 def editLastName(request, username, new_lname):
     u = User.objects.get(username=username)
     u.last_name = new_lname
     u.save()
     return render(request, 'roomName.html', {})
-
 
 
 def editUsername(request, username, new_username):
